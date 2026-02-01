@@ -61,15 +61,34 @@
       50% { transform: translateY(-40px) scale(1.2); opacity: 0.8; }
       100% { transform: translateY(-80px) scale(1); opacity: 0; }
     }
-    .hug-img {
-      display: none;
-      width: 250px;
-      margin: 20px auto 0;
-      animation: bounce 1.2s infinite alternate;
+    .hug-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      margin-top: 20px;
     }
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
+    .hug-img {
+      width: 250px;
+      position: absolute;
+      bottom: -350px; /* start hidden below */
+      left: 50%;
+      transform: translateX(-50%);
+      transition: bottom 1s ease-out;
+    }
+    .hug-img.show {
+      bottom: 20px; /* slide into view */
+    }
+    .final-msg {
+      font-size: 22px;
+      color: #e76f51;
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     audio {
       margin-top: 20px;
@@ -98,11 +117,13 @@
     <span class="twinkle">✨</span> I love you 🥺🤍<span class="twinkle">✨</span>
   </p>
 
-  <!-- Hugging duck + bunny image -->
-  <img src="A_digital_illustration_in_a_kawaii_art_style_featu.png" alt="Duck and Bunny Hugging" class="hug-img">
+  <div class="hug-container">
+    <!-- Hugging duck + bunny image -->
+    <img src="A_digital_illustration_in_a_kawaii_art_style_featu.png" alt="Duck and Bunny Hugging" class="hug-img">
+  </div>
 
   <!-- Final message -->
-  <p class="msg final-msg">
+  <p class="final-msg">
     💖 I WILL LOVE YOU TILL THE END OF TIME 💖
   </p>
 
@@ -118,6 +139,7 @@
 <script>
   const messages = document.querySelectorAll('.msg');
   const hugImg = document.querySelector('.hug-img');
+  const finalMsg = document.querySelector('.final-msg');
   const nextBtn = document.querySelector('.next-btn');
   let index = 0;
 
@@ -128,13 +150,13 @@
       messages[index].classList.add('visible');
     } else if (index === messages.length - 1) {
       // Show hug image and final message
-      hugImg.style.display = 'block';
-      messages[index].classList.add('visible');
+      hugImg.classList.add('show');
+      finalMsg.style.display = 'block';
       nextBtn.style.display = 'none';
     }
   });
 
-  // Optional: Floating hearts
+  // Floating hearts
   setInterval(() => {
     const heart = document.createElement('div');
     heart.className = 'heart';
