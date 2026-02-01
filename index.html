@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Diaa My Batta 🦆🐰</title>
+  <style>
+    body {
+      background: #e9f7ef; /* light green */
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 35px;
+      max-width: 450px;
+      margin: auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      color: #6abf69;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .heart {
+      font-size: 20px;
+      color: #4f9d69;
+      margin-top: 15px;
+    }
+
+    /* Cute duck & bunny hug */
+    .hug-container {
+      font-size: 80px;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .duck {
+      position: relative;
+      z-index: 2;
+      transform: translateX(-20px);
+    }
+
+    .bunny {
+      position: relative;
+      z-index: 1;
+      transform: translateX(20px);
+    }
+
+    /* Simple floating animation */
+    .hug-container {
+      animation: float 2s infinite alternate;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    audio {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hug-container">
+      <span class="duck">🦆</span>
+      <span class="bunny">🐰</span>
+    </div>
+
+    <h1>My Diaa, My Batta</h1>
+
+    <p>
+      You’re my peace, and the soul I live by.<br>
+      Your existence lights up my world.<br>
+      I could never survive without you.
+    </p>
+
+    <p class="heart">
+      Thank you for everything, my kind-hearted baby.<br>
+      I love you 🥺🤍
+    </p>
+
+    <audio controls autoplay loop>
+      <source src="at-my-worst.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</body>
+</html>
