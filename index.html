@@ -43,6 +43,12 @@
       color: #fff; /* white bunny */
       text-shadow: 0 0 2px #000; /* black eyes effect */
     }
+    .final-hug {
+      font-size: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     ul {
       list-style: none;
       padding: 0;
@@ -133,7 +139,7 @@
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.style.left = Math.random() * 400 + 'px';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
       heart.style.fontSize = (12 + Math.random() * 18) + 'px';
       heart.textContent = '❤️';
       document.body.appendChild(heart);
@@ -158,7 +164,18 @@
         setTimeout(() => li.classList.add('show'), 50);
         index++;
       } 
+
+      // LAST PAGE: fully hugging duck+bunny with final message
       if(index === messages.length){
+        hugContainer.innerHTML = '<div class="final-hug">🦆🤍🐰</div>';
+        const finalLi = document.createElement('li');
+        finalLi.textContent = "I WILL LOVE YOU TILL THE END OF TIME ❤️❤️❤️";
+        messagesList.appendChild(finalLi);
+        setTimeout(() => finalLi.classList.add('show'), 50);
+
+        // extra floating hearts continuously
+        setInterval(createHeart, 500);
+
         nextBtn.style.display = 'none';
       }
     });
