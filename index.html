@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>My Diaa My Batta 🦆🐰</title>
   <style>
     body {
@@ -20,79 +20,56 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       position: relative;
     }
-    .hug-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-      transition: transform 0.5s;
+    h1 {
+      color: #6abf69;
+      font-size: 28px;
+      margin-bottom: 15px;
     }
-    .hug-container.hug {
-      transform: scale(1.05); /* slight bounce effect */
-    }
-    .duck, .bunny {
-      font-size: 80px;
-      margin: 0 10px;
-      transition: transform 0.5s;
-    }
-    .duck {
-      color: #fff; /* white duck */
-      text-shadow: 0 0 5px #f7e967; /* yellow beak glow effect */
-    }
-    .bunny {
-      color: #fff; /* white bunny */
-      text-shadow: 0 0 2px #000; /* black eyes effect */
-    }
-    .final-hug {
-      font-size: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-    }
-    li {
-      opacity: 0;
+    p {
       font-size: 18px;
       line-height: 1.6;
       color: #333;
-      position: relative;
-      margin-bottom: 10px;
-      transition: opacity 0.6s;
+      display: none; /* hidden initially for Next button */
     }
-    li::before {
-      content: "✨"; /* twinkle bullets */
-      margin-right: 8px;
+    .visible {
+      display: block;
     }
-    li.show {
-      opacity: 1;
-    }
-    #nextBtn {
-      margin-top: 15px;
-      padding: 8px 20px;
+    .next-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
       font-size: 16px;
+      background-color: #f4a261;
       border: none;
-      background-color: #6abf69;
-      color: white;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
+      color: white;
     }
-    #nextBtn:hover {
-      background-color: #57a158;
+    .twinkle {
+      display: inline-block;
+      margin-right: 5px;
+      color: #e76f51;
     }
     .heart {
-      position: absolute;
-      font-size: 18px;
+      font-size: 24px;
       color: #e76f51;
-      animation: float 4s linear infinite;
+      position: absolute;
+      animation: floatHeart 3s infinite;
       pointer-events: none;
     }
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0); opacity: 1; }
-      100% { transform: translateY(-300px) translateX(50px) rotate(360deg); opacity: 0; }
+    @keyframes floatHeart {
+      0% { transform: translateY(0px) scale(1); opacity: 1; }
+      50% { transform: translateY(-40px) scale(1.2); opacity: 0.8; }
+      100% { transform: translateY(-80px) scale(1); opacity: 0; }
+    }
+    .hug-img {
+      display: none;
+      width: 250px;
+      margin: 20px auto 0;
+      animation: bounce 1.2s infinite alternate;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
     audio {
       margin-top: 20px;
@@ -101,84 +78,72 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <div id="hugContainer" class="hug-container">
-      <div class="duck">🦆</div>
-      <div class="bunny">🐰</div>
-    </div>
 
-    <ul id="messages"></ul>
+<div class="card">
+  <h1>My Diaa, My Batta</h1>
 
-    <button id="nextBtn">Next</button>
+  <p class="msg visible">
+    <span class="twinkle">✨</span> You’re my peace, and the soul I live by.<span class="twinkle">✨</span>
+  </p>
+  <p class="msg">
+    <span class="twinkle">✨</span> Your existence lights up my world.<span class="twinkle">✨</span>
+  </p>
+  <p class="msg">
+    <span class="twinkle">✨</span> I could never survive without you.<span class="twinkle">✨</span>
+  </p>
+  <p class="msg">
+    <span class="twinkle">✨</span> Thank you for everything, my kind-hearted baby.<span class="twinkle">✨</span>
+  </p>
+  <p class="msg">
+    <span class="twinkle">✨</span> I love you 🥺🤍<span class="twinkle">✨</span>
+  </p>
 
-    <audio id="music" loop>
-      <source src="at-my-worst.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+  <!-- Hugging duck + bunny image -->
+  <img src="A_digital_illustration_in_a_kawaii_art_style_featu.png" alt="Duck and Bunny Hugging" class="hug-img">
 
-  <script>
-    const messages = [
-      "You’re my peace, and the soul I live by.",
-      "Your existence lights up my world.",
-      "I could never survive without you.",
-      "Thank you for everything, my kind-hearted baby.",
-      "I love you 🥺🤍"
-    ];
+  <!-- Final message -->
+  <p class="msg final-msg">
+    💖 I WILL LOVE YOU TILL THE END OF TIME 💖
+  </p>
 
-    const messagesList = document.getElementById('messages');
-    const nextBtn = document.getElementById('nextBtn');
-    const hugContainer = document.getElementById('hugContainer');
-    const music = document.getElementById('music');
-    let index = 0;
+  <button class="next-btn">Next</button>
 
-    // Hug immediately on page load
-    hugContainer.classList.add('hug');
+  <!-- Audio -->
+  <audio controls autoplay loop>
+    <source src="at-my-worst.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
 
-    // Floating hearts function
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.fontSize = (12 + Math.random() * 18) + 'px';
-      heart.textContent = '❤️';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
+<script>
+  const messages = document.querySelectorAll('.msg');
+  const hugImg = document.querySelector('.hug-img');
+  const nextBtn = document.querySelector('.next-btn');
+  let index = 0;
+
+  nextBtn.addEventListener('click', () => {
+    if (index < messages.length - 1) {
+      messages[index].classList.remove('visible');
+      index++;
+      messages[index].classList.add('visible');
+    } else if (index === messages.length - 1) {
+      // Show hug image and final message
+      hugImg.style.display = 'block';
+      messages[index].classList.add('visible');
+      nextBtn.style.display = 'none';
     }
+  });
 
-    // Play music on first interaction
-    document.body.addEventListener('click', () => {
-      music.play();
-    }, { once: true });
+  // Optional: Floating hearts
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.textContent = '💖';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }, 800);
+</script>
 
-    nextBtn.addEventListener('click', () => {
-      if(index === 0){
-        // start floating hearts
-        setInterval(createHeart, 800);
-      }
-
-      if (index < messages.length) {
-        const li = document.createElement('li');
-        li.textContent = messages[index];
-        messagesList.appendChild(li);
-        setTimeout(() => li.classList.add('show'), 50);
-        index++;
-      } 
-
-      // LAST PAGE: fully hugging duck+bunny with final message
-      if(index === messages.length){
-        hugContainer.innerHTML = '<div class="final-hug">🦆🤍🐰</div>';
-        const finalLi = document.createElement('li');
-        finalLi.textContent = "I WILL LOVE YOU TILL THE END OF TIME ❤️❤️❤️";
-        messagesList.appendChild(finalLi);
-        setTimeout(() => finalLi.classList.add('show'), 50);
-
-        // extra floating hearts continuously
-        setInterval(createHeart, 500);
-
-        nextBtn.style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
