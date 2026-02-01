@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>My Diaa My Batta 🦆🐰</title>
   <style>
     body {
@@ -11,7 +11,6 @@
       padding-top: 50px;
       overflow-x: hidden;
     }
-
     .card {
       background: white;
       border-radius: 25px;
@@ -21,103 +20,90 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       position: relative;
     }
-
-    h1 {
-      color: #6abf69;
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
     .hug-container {
-      font-size: 90px;
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      transition: transform 0.5s;
     }
-
+    .hug-container.hug {
+      transform: scale(1.05); /* slight bounce effect */
+    }
     .duck, .bunny {
-      display: inline-block;
-      transition: transform 1s ease;
-      position: relative;
+      font-size: 80px;
+      margin: 0 10px;
+      transition: transform 0.5s;
     }
-
     .duck {
-      transform: translateX(-50px);
+      color: #fff; /* white duck */
+      text-shadow: 0 0 5px #f7e967; /* yellow beak glow effect */
     }
-
     .bunny {
-      transform: translateX(50px);
+      color: #fff; /* white bunny */
+      text-shadow: 0 0 2px #000; /* black eyes effect */
     }
-
-    .hug-container.hug .duck {
-      transform: translateX(-10px);
-    }
-
-    .hug-container.hug .bunny {
-      transform: translateX(10px);
-    }
-
     ul {
       list-style: none;
       padding: 0;
-      font-size: 18px;
-      color: #333;
-      line-height: 1.6;
+      margin-top: 10px;
     }
-
-    li::before {
-      content: "✨";
-      margin-right: 8px;
-      color: #f4a261;
-    }
-
     li {
       opacity: 0;
-      transition: opacity 0.8s ease;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+      position: relative;
+      margin-bottom: 10px;
+      transition: opacity 0.6s;
     }
-
+    li::before {
+      content: "✨"; /* twinkle bullets */
+      margin-right: 8px;
+    }
     li.show {
       opacity: 1;
     }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
+    #nextBtn {
+      margin-top: 15px;
+      padding: 8px 20px;
+      font-size: 16px;
       border: none;
-      border-radius: 12px;
       background-color: #6abf69;
       color: white;
-      font-size: 16px;
+      border-radius: 12px;
       cursor: pointer;
     }
-
+    #nextBtn:hover {
+      background-color: #57a158;
+    }
     .heart {
       position: absolute;
-      font-size: 20px;
-      animation: floatHeart 4s linear infinite;
-      opacity: 0.8;
+      font-size: 18px;
+      color: #e76f51;
+      animation: float 4s linear infinite;
+      pointer-events: none;
     }
-
-    @keyframes floatHeart {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      50% { transform: translateY(-50px) scale(1.2); opacity: 0.6; }
-      100% { transform: translateY(-100px) scale(1); opacity: 0; }
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(-300px) translateX(50px) rotate(360deg); opacity: 0; }
     }
-
+    audio {
+      margin-top: 20px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="hug-container" id="hugContainer">
-      <span class="duck">🦆</span>
-      <span class="bunny">🐰</span>
+    <div id="hugContainer" class="hug-container">
+      <div class="duck">🦆</div>
+      <div class="bunny">🐰</div>
     </div>
-
-    <h1>My Diaa My Batta</h1>
 
     <ul id="messages"></ul>
 
-    <button id="nextBtn">Next 💛</button>
+    <button id="nextBtn">Next</button>
 
     <audio id="music" loop>
       <source src="at-my-worst.mp3" type="audio/mpeg">
@@ -140,25 +126,28 @@
     const music = document.getElementById('music');
     let index = 0;
 
-    // Play music on first interaction (browser restriction)
+    // Hug immediately on page load
+    hugContainer.classList.add('hug');
+
+    // Floating hearts function
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 400 + 'px';
+      heart.style.fontSize = (12 + Math.random() * 18) + 'px';
+      heart.textContent = '❤️';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    // Play music on first interaction
     document.body.addEventListener('click', () => {
       music.play();
     }, { once: true });
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.textContent = '💖';
-      heart.style.left = Math.random() * 80 + '%';
-      heart.style.fontSize = (10 + Math.random()*20) + 'px';
-      document.querySelector('.card').appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }
-
     nextBtn.addEventListener('click', () => {
       if(index === 0){
-        // first click = hug animation + floating hearts
-        hugContainer.classList.add('hug');
+        // start floating hearts
         setInterval(createHeart, 800);
       }
 
@@ -170,7 +159,7 @@
         index++;
       } 
       if(index === messages.length){
-        nextBtn.style.display = 'none'; // hide button when done
+        nextBtn.style.display = 'none';
       }
     });
   </script>
